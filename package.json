@@ -18,6 +18,8 @@
     "html-to-text": "^3.3.0",
     "leet": "^1.3.0",
     "nock": "1.7.x",
+    "node-cron": "^1.2.1",
+    "node-schedule": "^1.3.0",
     "node-wolfram": "0.0.1",
     "npm": "",
     "querystring": "0.2.x",
