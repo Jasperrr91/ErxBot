@@ -15,30 +15,39 @@ exports.raised = {
 			description: 'show the progress of the (pre-)ICO',
 	process: function(bot,msg) {
 
-		var requestUrl = 'https://api.etherscan.io/api?module=account&action=balance&address=' + AuthDetails.presale_contract_address + '&tag=latest&apikey=' + AuthDetails.etherscan_api_key;
+		var requestUrl = 'https://api.etherscan.io/api?module=account&action=balance&address=' + AuthDetails.ico_contract_address + '&tag=latest&apikey=' + AuthDetails.etherscan_api_key;
 
 		request.get(requestUrl, function (err, response, body) {
 			try {
 				var balance = JSON.parse(body).result;
 				var ethereum = balance / 1000000000000000000;
 
-				var tokenRate = 10000;
-				var tokensSold = ethereum * tokenRate
-				var tokensAvailable = 4000000;
-				var progress = tokensSold * 100 / tokensAvailable
+				var tokenRate = 5000;
+				var tokensSold = ethereum * tokenRate;
+				var round1Sold = tokensSold;
+
+				var tokensAvailable = 40000000;
+				var presSaleSold = 1139167;
+
+				var currentPrice = 0.18;
+
+				tokensSold += presSaleSold;
+				tokensAvailable += presSaleSold;
+				var progress = tokensSold * 100 / tokensAvailable;
 
 				var valueEmbed = new Discord.RichEmbed()
-					.setAuthor("P R E - I C O", "https://erotix.io/assets/img/logo_28_28.png", "https://etherscan.io/address/0x9b0345a70b1bab861b8d10307f14029906cf6e09")
+					.setAuthor("I C O", "https://erotix.io/assets/img/logo_28_28.png", "https://etherscan.io/address/"+AuthDetails.ico_contract_address)
 					// .setDescription(responseMsg)
 					.setColor(0x3b99d9)
 					.setTimestamp();
 				valueEmbed.addField("ETH Raised", ethereum.toFixed(2), true);
 				valueEmbed.addField("Tokens Sold", tokensSold.toFixed(0), true);
-				valueEmbed.addField("Progress", progress.toFixed(2) + '%', true);
+				valueEmbed.addField("Current Price", currentPrice);
+				valueEmbed.addField("Progress", "Current Round: Round 1\n" + "Tokens sold: " + round1Sold +"/10.000.000" , true);
 				msg.channel.sendEmbed(valueEmbed);
 			} catch (e) {
 				var valueEmbed = new Discord.RichEmbed()
-					.setAuthor("P R E - I C O", "https://erotix.io/assets/img/logo_28_28.png", "https://etherscan.io/address/0x9b0345a70b1bab861b8d10307f14029906cf6e09")
+					.setAuthor("I C O", "https://erotix.io/assets/img/logo_28_28.png", "https://etherscan.io/address/" + AuthDetails.ico_contract_address)
 					// .setDescription(responseMsg)
 					.setColor(0x3b99d9)
 					.setTimestamp();
@@ -57,16 +66,16 @@ exports.watch = {
 	description: 'Posts updates if a new transaction has come in.',
 	process: function(bot,msg) {
 
-		var requestUrl = 'https://api.etherscan.io/api?module=account&action=balance&address=' + AuthDetails.presale_contract_address + '&tag=latest&apikey=' + AuthDetails.etherscan_api_key;
+		var requestUrl = 'https://api.etherscan.io/api?module=account&action=balance&address=' + AuthDetails.ico_contract_address + '&tag=latest&apikey=' + AuthDetails.etherscan_api_key;
 
 		request.get(requestUrl, function (err, response, body) {
 			try {
 				var balance = JSON.parse(body).result;
 				var ethereum = balance / 1000000000000000000;
 
-				var tokenRate = 10000;
+				var tokenRate = 5000;
 				var tokensSold = ethereum * tokenRate
-				var tokensAvailable = 4000000;
+				var tokensAvailable = 40000000;
 				var progress = tokensSold * 100 / tokensAvailable
 
 				var x = schedule.scheduleJob('*/10 * * * * *', function () {
@@ -84,7 +93,7 @@ exports.watch = {
 								ethereum = newEthereum;
 
 								var valueEmbed = new Discord.RichEmbed()
-									.setAuthor("P R E - I C O - N E W  B U Y  O R D E R", "https://erotix.io/assets/img/logo_28_28.png", "https://etherscan.io/address/0x9b0345a70b1bab861b8d10307f14029906cf6e09")
+									.setAuthor("I C O - N E W  B U Y  O R D E R", "https://erotix.io/assets/img/logo_28_28.png", "https://etherscan.io/address/" + AuthDetails.ico_contract_address)
 									// .setDescription(responseMsg)
 									.setColor(0x3b99d9)
 									.setTimestamp();
