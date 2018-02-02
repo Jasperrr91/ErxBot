@@ -36,6 +36,8 @@ exports.raised = {
 				tokensAvailable += presSaleSold;
 				var progress = tokensSold * 100 / tokensAvailable;
 
+				ethereum += 113.916736946883;
+
 
 
 				var valueEmbed = new Discord.RichEmbed()
@@ -46,7 +48,7 @@ exports.raised = {
 				valueEmbed.addField("ETH Raised", ethereum.toFixed(2), true);
 				valueEmbed.addField("Tokens Sold", tokensSold.toFixed(0), true);
 				valueEmbed.addField("Current Price", "$" + currentPrice);
-				valueEmbed.addField("Progress", "Current Round: Round 1\n" + "Tokens sold: " + round1Sold +"/10.000.000" , true);
+				valueEmbed.addField("Progress", "*Presale*" + "ERX sold: 1.139.167\n\n" + "*Round 1*\n" + "ERX sold: " + round1Sold +"/10.000.000" , true);
 				msg.channel.sendEmbed(valueEmbed);
 			} catch (e) {
 				var valueEmbed = new Discord.RichEmbed()
