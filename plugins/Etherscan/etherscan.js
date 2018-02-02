@@ -20,6 +20,7 @@ exports.raised = {
 		request.get(requestUrl, function (err, response, body) {
 			try {
 				var balance = JSON.parse(body).result;
+
 				var ethereum = balance / 1000000000000000000;
 
 				var tokenRate = 5000;
@@ -35,6 +36,8 @@ exports.raised = {
 				tokensAvailable += presSaleSold;
 				var progress = tokensSold * 100 / tokensAvailable;
 
+
+
 				var valueEmbed = new Discord.RichEmbed()
 					.setAuthor("I C O", "https://erotix.io/assets/img/logo_28_28.png", "https://etherscan.io/address/"+AuthDetails.ico_contract_address)
 					// .setDescription(responseMsg)
@@ -42,7 +45,7 @@ exports.raised = {
 					.setTimestamp();
 				valueEmbed.addField("ETH Raised", ethereum.toFixed(2), true);
 				valueEmbed.addField("Tokens Sold", tokensSold.toFixed(0), true);
-				valueEmbed.addField("Current Price", currentPrice);
+				valueEmbed.addField("Current Price", "$" + currentPrice);
 				valueEmbed.addField("Progress", "Current Round: Round 1\n" + "Tokens sold: " + round1Sold +"/10.000.000" , true);
 				msg.channel.sendEmbed(valueEmbed);
 			} catch (e) {
