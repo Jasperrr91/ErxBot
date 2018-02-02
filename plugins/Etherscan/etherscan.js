@@ -20,9 +20,11 @@ exports.raised = {
 		request.get(requestUrl, function (err, response, body) {
 			try {
 				var balance = JSON.parse(body).result;
+				console.log(body);
+				console.log(balance);
 
 				var ethereum = balance / 1000000000000000000;
-
+				console.log(ethereum);
 				var tokenRate = 5000;
 				var tokensSold = ethereum * tokenRate;
 				var round1Sold = tokensSold;
