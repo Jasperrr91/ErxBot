@@ -115,6 +115,6 @@ exports.watch = {
 			}
 		});
 
-		var requestUrl = 'https://api.etherscan.io/api?module=account&action=balance&address=' + AuthDetails.presale_contract_address + '&tag=latest&apikey=' + AuthDetails.etherscan_api_key;
+		// var requestUrl = 'https://api.etherscan.io/api?module=account&action=balance&address=' + AuthDetails.presale_contract_address + '&tag=latest&apikey=' + AuthDetails.etherscan_api_key;
 	}
 };
